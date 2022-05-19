@@ -1,6 +1,6 @@
 # Felipy
 
-A free educational library in Python. 
+A Free Educational Library in Python. 
 
 # Goals:
   - Build a web module to draw using Python and webassembly.
