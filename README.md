@@ -1,4 +1,4 @@
-# Felipy
+# Felpy
 
 A Free Educational Library in Python. 
 
