@@ -1,12 +1,15 @@
-import { TargetProxy } from "./proxy/target"
-
 const pyodideWorker = new Worker("pyodideWorker.js")
-const targetProxy = new TargetProxy(pyodideWorker)
-targetProxy.register("document", document)
+
+// eslint-disable-next-line import/first
+import "./via/receiver/receiver"
+
+// eslint-disable-next-line prettier/prettier, no-undef
+ViaReceiver.postMessage = ((data: any) => pyodideWorker.postMessage(data))
 
 export function getCodeRunner(
   setLoading: (loaded: boolean) => void,
-  setCodeRunning: (running: boolean) => void
+  setCodeRunning: (running: boolean) => void,
+  onError: (error: string) => void
 ) {
   const interruptBuffer = new Uint8Array(new SharedArrayBuffer(1))
 
@@ -23,6 +26,9 @@ export function getCodeRunner(
   }
 
   pyodideWorker.onmessage = (msg) => {
+    // eslint-disable-next-line prettier/prettier, no-undef
+    ViaReceiver.OnMessage(msg.data)
+
     switch (msg.data.cmd) {
       case "loaded":
         setLoading(false)
@@ -32,6 +38,7 @@ export function getCodeRunner(
         break
       case "runCodeError":
         setCodeRunning(false)
+        onError(msg.data.error)
         break
     }
   }

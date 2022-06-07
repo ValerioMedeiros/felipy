@@ -1,6 +1,12 @@
-.split {
+.split-horizontal {
   display: flex;
   flex-direction: row;
+  height: 100%;
+}
+
+.split-vertical {
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
@@ -13,4 +19,9 @@
 .gutter.gutter-horizontal {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
   cursor: col-resize;
+}
+
+.gutter.gutter-vertical {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
+  cursor: row-resize;
 }
