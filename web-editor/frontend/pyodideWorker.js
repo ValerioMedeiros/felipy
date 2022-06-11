@@ -9,20 +9,8 @@ async function loadPyodideAndPackages() {
   await self.pyodide.loadPackage("micropip")
   await self.pyodide.runPythonAsync(`
     import micropip
-    await micropip.install("http://localhost:8080/turtle-0.0.1-py3-none-any.whl")
     await micropip.install("freegames")
   `)
-  // eslint-disable-next-line no-undef
-  importScripts(
-    "./src/via/controller/object.js",
-    "./src/via/controller/property.js",
-    "./src/via/controller/controller.js"
-  )
-  // eslint-disable-next-line no-undef
-  Via.postMessage = (data) => self.postMessage(data)
-  // eslint-disable-next-line no-undef
-  self.document = via.document
-  console.log(document.getElementById("turtle").innerHTML)
   self.postMessage({ cmd: "loaded" })
 }
 const pyodideReadyPromise = loadPyodideAndPackages()

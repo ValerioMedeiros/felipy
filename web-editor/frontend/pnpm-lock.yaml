@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@monaco-editor/react': ^4.4.5
+  '@svgdotjs/svg.js': ^3.1.2
   '@types/react': ^18.0.0
   '@types/react-dom': ^18.0.0
   '@typescript-eslint/eslint-plugin': ^5.25.0
@@ -30,6 +31,7 @@ specifiers:
 
 dependencies:
   '@monaco-editor/react': 4.4.5_d24t5d2y775ybedwi37th2htxm
+  '@svgdotjs/svg.js': 3.1.2
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-resize-detector: 7.0.0_ef5jwxihqo6n7gxfmzogljlgcm
@@ -1482,6 +1484,10 @@ packages:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.7
     dev: true
+
+  /@svgdotjs/svg.js/3.1.2:
+    resolution: {integrity: sha512-0ZCWTiuRjCXT2SUoVDiu+8DLuRQlkxZbO680Y2QkV7jNsULzJajrx6A3MxA/IBQg6UGV5csgPZ8w7U57hZSK+A==}
+    dev: false
 
   /@types/estree/0.0.39:
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
@@ -3471,7 +3477,6 @@ packages:
 
   /monaco-editor/0.33.0:
     resolution: {integrity: sha512-VcRWPSLIUEgQJQIE0pVT8FcGBIgFoxz7jtqctE+IiCxWugD0DwgyQBcZBhdSrdMC84eumoqMZsGl2GTreOzwqw==}
-    dev: true
 
   /mrmime/1.0.0:
     resolution: {integrity: sha512-a70zx7zFfVO7XpnQ2IX1Myh9yY4UYvfld/dikWRnsXxbyvMcfz+u6UfgNAtH+k2QqtJuzVpv6eLTx1G2+WKZbQ==}

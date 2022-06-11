@@ -9,7 +9,7 @@ interface Props {
 }
 
 function Terminal(props: Props) {
-  const term = new Xterm()
+  const term = new Xterm({ rendererType: "dom" })
   term.setOption("theme", {
     background: "#202B33",
     foreground: "#F5F8FA"

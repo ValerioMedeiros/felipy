@@ -1,11 +1,5 @@
 const pyodideWorker = new Worker("pyodideWorker.js")
 
-// eslint-disable-next-line import/first
-import "./via/receiver/receiver"
-
-// eslint-disable-next-line prettier/prettier, no-undef
-ViaReceiver.postMessage = ((data: any) => pyodideWorker.postMessage(data))
-
 export function getCodeRunner(
   setLoading: (loaded: boolean) => void,
   setCodeRunning: (running: boolean) => void,
@@ -26,9 +20,6 @@ export function getCodeRunner(
   }
 
   pyodideWorker.onmessage = (msg) => {
-    // eslint-disable-next-line prettier/prettier, no-undef
-    ViaReceiver.OnMessage(msg.data)
-
     switch (msg.data.cmd) {
       case "loaded":
         setLoading(false)
