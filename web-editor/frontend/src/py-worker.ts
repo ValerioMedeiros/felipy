@@ -1,3 +1,6 @@
+import { useEffect } from "react"
+import { Turtle } from "turtle-graphics"
+
 const pyodideWorker = new Worker("pyodideWorker.js")
 
 export function getCodeRunner(
@@ -6,8 +9,10 @@ export function getCodeRunner(
   onError: (error: string) => void
 ) {
   const interruptBuffer = new Uint8Array(new SharedArrayBuffer(1))
+  const awaitBuffer = new Int32Array(new SharedArrayBuffer(1024))
 
   pyodideWorker.postMessage({ cmd: "setInterruptBuffer", interruptBuffer })
+  pyodideWorker.postMessage({ cmd: "setAwaitBuffer", awaitBuffer })
 
   function interruptExecution() {
     interruptBuffer[0] = 2
@@ -18,6 +23,11 @@ export function getCodeRunner(
     pyodideWorker.postMessage({ cmd: "runCode", code })
     setCodeRunning(true)
   }
+
+  useEffect(() => {
+    const turtle = new Turtle(document.getElementById("turtle")!)
+    console.log(turtle)
+  }, [])
 
   pyodideWorker.onmessage = (msg) => {
     switch (msg.data.cmd) {

@@ -22,6 +22,7 @@ specifiers:
   react-dom: ^18.0.0
   react-resize-detector: ^7.0.0
   react-split: ^2.0.14
+  turtle-graphics: ^1.6.0
   typescript: ^4.6.3
   unocss: ^0.33.5
   vite: ^2.9.9
@@ -36,6 +37,7 @@ dependencies:
   react-dom: 18.1.0_react@18.1.0
   react-resize-detector: 7.0.0_ef5jwxihqo6n7gxfmzogljlgcm
   react-split: 2.0.14_react@18.1.0
+  turtle-graphics: 1.6.0
   xterm: 4.18.0
   xterm-addon-fit: 0.5.0_xterm@4.18.0
 
@@ -3358,6 +3360,10 @@ packages:
     resolution: {integrity: sha512-lxpCM3HTvquGxKGzHeknB/sUjuVoUElLlfYnXZT73K8geR9jQbroGlSCFBax9/0mpGoD3kzcMLnOlGQPJJNyqQ==}
     dev: true
 
+  /konva/8.3.9:
+    resolution: {integrity: sha512-vZ7f4Y1LMMOkvfFCGoHt0CoanKdpv81gZC4Q4pnIBO6vHEBx+1KBdH6NR5ORd+HOkGwkRXTVPbFokrYkBSWo1g==}
+    dev: false
+
   /leven/3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
@@ -4200,6 +4206,13 @@ packages:
       tslib: 1.14.1
       typescript: 4.6.4
     dev: true
+
+  /turtle-graphics/1.6.0:
+    resolution: {integrity: sha512-PleK6GXac4Cmhc74uzDHUxR7EneL3fxmWpN8/PQxKbGMGtT3Xu61leZ87IP5a5Nq6GVV+UcXiMVlctmUZD+0aw==}
+    dependencies:
+      '@svgdotjs/svg.js': 3.1.2
+      konva: 8.3.9
+    dev: false
 
   /type-check/0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}

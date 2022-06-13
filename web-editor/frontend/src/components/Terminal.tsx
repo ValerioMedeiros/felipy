@@ -21,14 +21,14 @@ function Terminal(props: Props) {
       fitAddon.fit()
     }
   })
-  const prompt = () => {
-    const shellPrompt = "$ "
-    term.write("\r\n" + shellPrompt)
-  }
 
   useEffect(() => {
     term.open(terminalRef.current!)
     fitAddon.fit()
+    const prompt = () => {
+      const shellPrompt = "$ "
+      term.write("\r\n" + shellPrompt)
+    }
     let data = ""
     term.onKey((key) => {
       const char = key.domEvent.key

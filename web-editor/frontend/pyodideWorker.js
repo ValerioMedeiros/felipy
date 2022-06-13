@@ -9,8 +9,10 @@ async function loadPyodideAndPackages() {
   await self.pyodide.loadPackage("micropip")
   await self.pyodide.runPythonAsync(`
     import micropip
+
     await micropip.install("freegames")
   `)
+  self.id = 0
   self.postMessage({ cmd: "loaded" })
 }
 const pyodideReadyPromise = loadPyodideAndPackages()
@@ -22,6 +24,9 @@ self.addEventListener("message", async (msg) => {
     case "setInterruptBuffer":
       self.pyodide.setInterruptBuffer(msg.data.interruptBuffer)
       break
+    case "setAwaitBuffer":
+      self.awaitBuffer = msg.data.awaitBuffer
+      break
     case "runCode":
       try {
         const result = await self.pyodide.runPythonAsync(msg.data.code)
@@ -29,10 +34,6 @@ self.addEventListener("message", async (msg) => {
       } catch (error) {
         self.postMessage({ cmd: "runCodeError", error })
       }
-      break
-    default:
-      // eslint-disable-next-line no-undef
-      Via.OnMessage(msg.data)
       break
   }
 })

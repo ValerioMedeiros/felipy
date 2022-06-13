@@ -1,11 +1,10 @@
 import Editor from "./components/Editor"
 import Split from "react-split"
 import "./index.css"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Terminal from "./components/Terminal"
 import { classes } from "./utils"
 import { getCodeRunner } from "./py-worker"
-import { Turtle } from "./turtle"
 
 function App() {
   const [code, setCode] = useState("")
@@ -17,24 +16,6 @@ function App() {
     setCodeRunning,
     console.error
   )
-
-  useEffect(() => {
-    ;(async () => {
-      const turtle = new Turtle()
-
-      await turtle.fd(50)
-      turtle.left(45)
-      await turtle.fd(50)
-      turtle.penUp()
-      turtle.left(45)
-      await turtle.fd(50)
-      turtle.penDown()
-      turtle.left(45)
-      await turtle.fd(50)
-      turtle.left(45)
-      await turtle.fd(50)
-    })()
-  })
 
   return (
     <div className="w-full h-full">
