@@ -1,27 +1,38 @@
-import express from "express"
-import http from "http"
+import fastify from "fastify"
 import { Server } from "socket.io"
-import helmet from "helmet"
-import cors from "cors"
-import morgan from "morgan"
 import parser from "socket.io-msgpack-parser"
-import { Server as wsEngine } from "eiows"
+import eiows from "eiows"
+import cors from "@fastify/cors"
+import helmet from "@fastify/helmet"
+import { nanoid } from "nanoid/non-secure"
 
-const app = express()
+const { Server: wsEngine } = eiows
 
-app.use(cors({ origin: "*" }))
-app.use(helmet())
-app.use(express.json())
-app.use(morgan("dev"))
+const app = fastify({ logger: true })
 
-const server = http.createServer(app)
+app.register(cors)
+app.register(helmet)
 
-const io = new Server(server, { parser, wsEngine })
+const io = new Server(app.server, { parser, wsEngine })
 
-io.on("connection", (socket) => {
-  console.log("a user connected with id:", socket.id)
+app.post("/createRoom", async (req, res) => {
+  const roomId = nanoid()
+
+  const room = io.of(`/${roomId}`)
+  room.use((socket, next) => {
+    next()
+  })
+  room.on("connection", (socket) => {
+    console.log(socket.id)
+  })
+
+  return { roomId }
 })
 
-server.listen(3000, () => {
-  console.log("Server listening on port 3000")
+app.listen({ port: 9000 }, (err, address) => {
+  if (err) {
+    console.error(err)
+    process.exit(1)
+  }
+  console.log(`server listening on ${address}`)
 })

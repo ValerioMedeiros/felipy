@@ -20,12 +20,23 @@ const pyodideReadyPromise = loadPyodideAndPackages()
 self.addEventListener("message", async (msg) => {
   await pyodideReadyPromise
 
+  const test = new Proxy(
+    {},
+    {
+      get: (_, key) => {
+        self.postMessage({ cmd: "turtle", key })
+        return Atomics.wait(self.awaitBuffer, 0, 0)
+      }
+    }
+  )
+
   switch (msg.data.cmd) {
     case "setInterruptBuffer":
       self.pyodide.setInterruptBuffer(msg.data.interruptBuffer)
       break
     case "setAwaitBuffer":
       self.awaitBuffer = msg.data.awaitBuffer
+      console.log(test.oi)
       break
     case "runCode":
       try {
