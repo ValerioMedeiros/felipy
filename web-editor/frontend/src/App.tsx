@@ -1,60 +1,15 @@
-import Editor from "./components/Editor"
-import Split from "react-split"
-import "./index.css"
-import { useState } from "react"
-import Terminal from "./components/Terminal"
-import { classes } from "./utils"
-import { getCodeRunner } from "./py-worker"
+import { Route } from "wouter-preact"
+import LoginPage from "./pages/auth/Login"
+import RegisterPage from "./pages/auth/Register"
+import EditorPage from "./pages/Editor"
 
 function App() {
-  const [code, setCode] = useState("")
-  const [loading, setLoading] = useState(true)
-  const [codeRunning, setCodeRunning] = useState(false)
-
-  const { runCode, interruptExecution } = getCodeRunner(
-    setLoading,
-    setCodeRunning,
-    console.error
-  )
-
   return (
-    <div className="w-full h-full">
-      <div className="flex flex-col h-full">
-        <div className="h-10 bg-gray-700">
-          <div>
-            <button
-              onClick={() => runCode(code)}
-              disabled={loading || codeRunning}
-              className={classes(
-                { "opacity-50": loading || codeRunning },
-                "rounded border-0 py-1 px-3 bg-green-500 text-green-900 text-base"
-              )}
-            >
-              {codeRunning ? "Executando" : "Executar"}
-            </button>
-            <button
-              onClick={() => interruptExecution()}
-              disabled={loading || !codeRunning}
-              className={classes(
-                { "opacity-50": loading || !codeRunning },
-                "rounded border-0 py-1 px-3 bg-red-500 text-red-900 text-base"
-              )}
-            >
-              Parar
-            </button>
-          </div>
-        </div>
-        <div className="h-full">
-          <Split className="split-horizontal">
-            <Editor language="python" code="" onCodeChange={setCode} />
-            <Split direction="vertical" className="split-vertical">
-              <div id="turtle" className="w-full h-full"></div>
-              <Terminal onCommand={console.log} />
-            </Split>
-          </Split>
-        </div>
-      </div>
-    </div>
+    <>
+      <Route path="/auth/login" component={LoginPage} />
+      <Route path="/auth/register" component={RegisterPage} />
+      <Route path="/editor" component={EditorPage} />
+    </>
   )
 }
 

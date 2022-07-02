@@ -13,13 +13,20 @@
   "dependencies": {
     "@fastify/cors": "^8.0.0",
     "@fastify/helmet": "^9.1.0",
+    "@fastify/type-provider-typebox": "^1.0.0",
+    "@prisma/client": "^3.15.2",
+    "@sinclair/typebox": "^0.23.5",
+    "argon2": "^0.28.5",
     "eiows": "^4.1.2",
     "fastify": "^4.0.3",
+    "google-auth-library": "^8.0.2",
+    "jsonwebtoken": "^8.5.1",
     "nanoid": "^4.0.0",
     "socket.io": "^4.5.1",
     "socket.io-msgpack-parser": "^3.0.1"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^17.0.42",
     "nodemon": "^2.0.16",
     "ts-node": "^10.8.1",

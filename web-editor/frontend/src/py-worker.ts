@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "preact/hooks"
 import { Turtle } from "turtle-graphics"
 
 const pyodideWorker = new Worker("pyodideWorker.js")

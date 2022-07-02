@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "preact/hooks"
 import { Terminal as Xterm } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
 import "xterm/css/xterm.css"
@@ -15,7 +15,6 @@ function Terminal(props: Props) {
     foreground: "#F5F8FA"
   })
   const fitAddon = new FitAddon()
-  term.loadAddon(fitAddon)
   const { ref: terminalRef } = useResizeDetector({
     onResize: () => {
       fitAddon.fit()
@@ -24,6 +23,7 @@ function Terminal(props: Props) {
 
   useEffect(() => {
     term.open(terminalRef.current!)
+    term.loadAddon(fitAddon)
     fitAddon.fit()
     const prompt = () => {
       const shellPrompt = "$ "
@@ -50,7 +50,7 @@ function Terminal(props: Props) {
     prompt()
   }, [])
 
-  return <div className="h-full w-full" ref={terminalRef}></div>
+  return <div class="h-full w-full" ref={terminalRef}></div>
 }
 
 export default Terminal

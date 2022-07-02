@@ -1,11 +1,11 @@
 import { defineConfig } from "vite"
-import react from "@vitejs/plugin-react"
+import preact from "@preact/preset-vite"
 import Unocss from "unocss/vite"
 import { VitePWA } from "vite-plugin-pwa"
 
 export default defineConfig({
   plugins: [
-    react(),
+    preact(),
     Unocss(),
     VitePWA({}),
     {
