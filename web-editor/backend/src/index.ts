@@ -168,17 +168,47 @@ app.post("/refreshToken", { schema: Type.Object({ refreshToken: Type.String() })
   }
 })
 
-app.post("/createRoom", { onRequest: [authenticate] }, async (req, res) => {
+app.post("/createRoom", (req, res) => {
   // @ts-ignore
   const roomId = nanoid()
 
-  const room = io.of(`/${roomId}`)
-  room.use((socket, next) => {
-    next()
-  })
-  room.on("connection", (socket) => {
-    console.log(socket.id)
-  })
+  io.of(`/room/${roomId}`)
+    .use((socket, next) => {
+      next()
+    })
+    .on("connection", (socket) => {
+      console.log(socket.id)
+    })
+
+  return { roomId }
+})
+
+const calls: { [key: string]: { owner: string | null, participants: string[] } } = {}
+
+app.post("/createP2PRoom", (req, res) => {
+  const roomId = nanoid()
+
+  calls[roomId] = { owner: null, participants: [] }
+
+  io.of(`/p2p/${roomId}`)
+    .use((socket, next) => {
+      if (calls[roomId].participants.length < 4) {
+        next()
+      } else {
+        next(new Error("Room full"))
+      }
+    })
+    .on("connection", (socket) => {
+      if (calls[roomId].participants.length == 0) {
+        calls[roomId].owner = socket.id
+      }
+
+      calls[roomId].participants.push(socket.id)
+
+      socket.on("disconnect", () => {
+        calls[roomId].participants.splice(calls[roomId].participants.indexOf(socket.id), 1)
+      })
+    })
 
   return { roomId }
 })

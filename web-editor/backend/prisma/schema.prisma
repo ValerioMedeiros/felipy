@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "sqlite"
   url      = "file:./dev.db"
 }
 
 model User {
-  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  id            String  @id @default(uuid())
   name          String
   email         String  @unique
   password      String?
@@ -20,7 +20,7 @@ model User {
 }
 
 model RefreshToken {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(uuid())
   user        User     @relation(fields: [userId], references: [id])
   userId      String
   createdAt   DateTime @default(now())

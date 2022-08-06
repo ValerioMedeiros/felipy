@@ -4,7 +4,7 @@ import "../index.css"
 import { useState } from "preact/hooks"
 import Terminal from "../components/Terminal"
 import { classes } from "../utils"
-import { getCodeRunner } from "../py-worker"
+import { getCodeRunner } from "../skulpt-runner"
 
 function EditorPage() {
   const [code, setCode] = useState("")

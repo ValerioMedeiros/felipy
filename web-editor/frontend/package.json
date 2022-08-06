@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -14,10 +14,13 @@
     "@uiw/codemirror-theme-dracula": "^4.9.5",
     "@uiw/react-codemirror": "^4.9.5",
     "axios": "^0.27.2",
+    "blockly": "^8.0.4",
     "preact": "^10.8.2",
+    "react-blockly": "^7.0.1",
     "react-hook-form": "^7.32.2",
     "react-resize-detector": "^7.0.0",
     "react-split": "^2.0.14",
+    "skulpt": "^1.2.0",
     "turtle-graphics": "^1.6.0",
     "wouter-preact": "2.8.0-alpha.2",
     "xterm": "^4.18.0",
@@ -38,6 +41,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.30.0",
     "prettier": "^2.6.2",
+    "pyodide": "^0.20.0",
     "typescript": "^4.6.3",
     "unocss": "^0.33.5",
     "vite": "^2.9.9",
