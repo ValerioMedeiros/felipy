@@ -4,12 +4,16 @@ import "../index.css"
 import { useState } from "preact/hooks"
 import Terminal from "../components/Terminal"
 import { classes } from "../utils"
-import { getCodeRunner } from "../skulpt-runner"
+import { getCodeRunner } from "../runners/pyodide"
+import { BlocklyEditor } from "../components/Blockly"
+import { useRoute } from "wouter-preact"
 
 function EditorPage() {
   const [code, setCode] = useState("")
   const [loading, setLoading] = useState(true)
   const [codeRunning, setCodeRunning] = useState(false)
+
+  const [, params] = useRoute<{ runner: string, editor: string }>("/editor/:runner/:editor")
 
   const { runCode, interruptExecution } = getCodeRunner(
     setLoading,
@@ -45,8 +49,10 @@ function EditorPage() {
           </div>
         </div>
         <div className="h-full">
+          {/* @ts-ignore */}
           <Split class="split-horizontal">
-            <Editor language="python" code="" onCodeChange={setCode} />
+            {params?.editor === "codemirror" ? <Editor language="python" code="" onCodeChange={setCode} /> : <BlocklyEditor onCodeChange={setCode} />}
+            {/* @ts-ignore */}
             <Split direction="vertical" class="split-vertical">
               <div id="turtle" class="w-full h-full"></div>
               <Terminal onCommand={console.log} />

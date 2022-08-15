@@ -8,7 +8,7 @@ function App() {
     <>
       <Route path="/auth/login" component={LoginPage} />
       <Route path="/auth/register" component={RegisterPage} />
-      <Route path="/editor" component={EditorPage} />
+      <Route path="/editor/:runner/:editor" component={EditorPage} />
     </>
   )
 }

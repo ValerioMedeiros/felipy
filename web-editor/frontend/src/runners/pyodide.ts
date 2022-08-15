@@ -26,7 +26,7 @@ export function getCodeRunner(
           console.log(output)
         },
         stdin: () => {
-          return "Teste"
+          return String(prompt())
         }
       })
       await pyodide.current.loadPackage("micropip")

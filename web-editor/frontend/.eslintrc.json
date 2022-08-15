@@ -24,6 +24,7 @@
   "rules": {
     "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
     "react/react-in-jsx-scope": "off",
-    "react/no-unknown-property": "off"
+    "react/no-unknown-property": "off",
+    "import/no-absolute-path": "off"
   }
 }
