@@ -1,3 +1,7 @@
-/*
+/editor/pyodide/codemirror
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Opener-Policy: same-origin
+
+/editor/pyodide/blockly
   Cross-Origin-Embedder-Policy: require-corp
   Cross-Origin-Opener-Policy: same-origin
