@@ -1,15 +1,11 @@
-import { useEffect } from "preact/hooks"
+import { useEffect, useState } from "preact/hooks"
 import { Terminal as Xterm } from "xterm"
 import { FitAddon } from "xterm-addon-fit"
 import "xterm/css/xterm.css"
 import { useResizeDetector } from "react-resize-detector"
 
-interface Props {
-  onCommand: (command: string) => void
-}
-
-function Terminal(props: Props) {
-  const term = new Xterm({ rendererType: "dom" })
+export function useTerminal() {
+  const term = new Xterm()
   term.setOption("theme", {
     background: "#202B33",
     foreground: "#F5F8FA"
@@ -21,36 +17,80 @@ function Terminal(props: Props) {
     }
   })
 
+  let textToWrite = ""
+
   useEffect(() => {
     term.open(terminalRef.current!)
     term.loadAddon(fitAddon)
     fitAddon.fit()
-    const prompt = () => {
-      const shellPrompt = "$ "
-      term.write("\r\n" + shellPrompt)
-    }
-    let data = ""
-    term.onKey((key) => {
-      const char = key.domEvent.key
-      if (char === "Enter") {
-        prompt()
-        props.onCommand(data)
-        data = ""
-      } else if (char === "Backspace") {
-        if (data.length > 0) {
-          term.write("\b \b")
-          data = data.slice(0, -1)
-        }
-      } else {
-        term.write(char)
-        data += char
-      }
-    })
-
-    prompt()
   }, [])
 
-  return <div class="h-full w-full" ref={terminalRef}></div>
-}
+  const write = (text: string, error: boolean) => {
+    if (error) {
+      term.write(`\x1b[31m${text}\x1b[0m`)
+    } else {
+      if (text.includes("\n")) {
+        term.write(textToWrite)
+        textToWrite = ""
 
-export default Terminal
+        const lines = text.split("\n")
+
+        term.write(lines.splice(0, -1).join("\r\n"))
+
+      const lastLine = lines[0]
+
+        if (lastLine === "") {
+          term.write(lastLine + "\r\n")
+        } else {
+          textToWrite += lastLine
+        }
+      } else {
+        textToWrite += text
+      }
+    }
+  }
+
+  const flush = (final = false) => {
+    if (final) {
+      term.write("\r")
+    }
+
+    if (textToWrite) {
+      term.write(textToWrite + "\n")
+      textToWrite = ""
+    }
+  }
+
+  const receiveOutput = (): Promise<string> => {
+    return new Promise(resolve => {
+      let data = ""
+
+      term.onKey((key) => {
+        const char = key.domEvent.key
+        if (char === "Enter") {
+          resolve(data)
+        } else if (char === "Backspace") {
+          if (data.length > 0) {
+            term.write("\b \b")
+            data = data.slice(0, -1)
+          }
+        } else {
+          term.write(char)
+          data += char
+        }
+      })
+    })
+  }
+
+  const clear = () => {
+    term.clear()
+  }
+
+  return {
+    terminalRef,
+    write,
+    flush,
+    clear,
+    receiveOutput
+  }
+}

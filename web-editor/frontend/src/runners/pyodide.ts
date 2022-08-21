@@ -5,11 +5,15 @@ import { Turtle } from "turtle-graphics"
 
 declare const loadPyodide: typeof loadPyodideInterface
 
-export function getCodeRunner(
+interface IParams {
   setLoading: (loaded: boolean) => void,
   setCodeRunning: (running: boolean) => void,
+  onOutput: (output: string) => void,
+  onInput: () => string,
   onError: (error: string) => void
-) {
+}
+
+export function useCodeRunner({ setLoading, setCodeRunning, onOutput, onInput, onError }: IParams) {
   const interruptBuffer = new Uint8Array(new SharedArrayBuffer(1))
 
   const pyodide = useRef<PyodideInterface>()
@@ -19,15 +23,9 @@ export function getCodeRunner(
       await import("https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js")
 
       pyodide.current = await loadPyodide({
-        stderr: (error: string) => {
-          console.error(error)
-        },
-        stdout: (output: string) => {
-          console.log(output)
-        },
-        stdin: () => {
-          return String(prompt())
-        }
+        stderr: onError,
+        stdout: onOutput,
+        stdin: onInput
       })
       await pyodide.current.loadPackage("micropip")
       await pyodide.current.runPythonAsync(`

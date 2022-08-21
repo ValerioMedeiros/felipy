@@ -2,9 +2,9 @@ import Editor from "../components/Editor"
 import Split from "react-split"
 import "../index.css"
 import { useState } from "preact/hooks"
-import Terminal from "../components/Terminal"
+import { useTerminal } from "../components/Terminal"
 import { classes } from "../utils"
-import { getCodeRunner } from "../runners/pyodide"
+import { useCodeRunner } from "../runners/pyodide-worker"
 import { BlocklyEditor } from "../components/Blockly"
 import { useRoute } from "wouter-preact"
 
@@ -15,19 +15,28 @@ function EditorPage() {
 
   const [, params] = useRoute<{ runner: string, editor: string }>("/editor/:runner/:editor")
 
-  const { runCode, interruptExecution } = getCodeRunner(
+  const { write, flush, receiveOutput, clear, terminalRef } = useTerminal()
+
+  const { runCode, interruptExecution } = useCodeRunner({
     setLoading,
     setCodeRunning,
-    console.error
-  )
+    onOutput: write,
+    onFlush: flush,
+    onInput: receiveOutput
+  })
+
+  const executeCode = () => {
+    clear()
+    runCode(code)
+  }
 
   return (
-    <div class="w-full h-full">
+    <div class="w-full h-full overflow-hidden">
       <div class="flex flex-col h-full">
         <div class="h-10 bg-gray-700">
           <div>
             <button
-              onClick={() => runCode(code)}
+              onClick={() => executeCode()}
               disabled={loading || codeRunning}
               class={classes(
                 { "opacity-50": loading || codeRunning },
@@ -51,11 +60,11 @@ function EditorPage() {
         <div className="h-full">
           {/* @ts-ignore */}
           <Split class="split-horizontal">
-            {params?.editor === "codemirror" ? <Editor language="python" code="" onCodeChange={setCode} /> : <BlocklyEditor onCodeChange={setCode} />}
+            {params?.editor === "codemirror" ? <Editor language="python" code={code} onCodeChange={setCode} /> : <BlocklyEditor onCodeChange={setCode} />}
             {/* @ts-ignore */}
             <Split direction="vertical" class="split-vertical">
-              <div id="turtle" class="w-full h-full"></div>
-              <Terminal onCommand={console.log} />
+              <div id="turtle" ></div>
+              <div ref={terminalRef}></div>
             </Split>
           </Split>
         </div>

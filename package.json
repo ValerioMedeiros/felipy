@@ -1,0 +1,6 @@
+{
+	"dependencies": {
+		"ataraxia": "^0.12.2",
+		"ataraxia-tcp": "^0.12.0"
+	}
+}

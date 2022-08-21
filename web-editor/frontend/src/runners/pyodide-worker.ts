@@ -1,45 +1,52 @@
-const pyodideWorker = new Worker(
-  new URL("./pyodideWorker.ts", import.meta.url),
-  {
-    type: "module"
-  }
-)
+import { useEffect, useRef } from "preact/hooks"
 
-export function getCodeRunner(
+interface IParams {
   setLoading: (loaded: boolean) => void,
   setCodeRunning: (running: boolean) => void,
-  onError: (error: string) => void
-) {
-  const interruptBuffer = new Uint8Array(new SharedArrayBuffer(1))
+  onOutput: (output: string, error: boolean) => void,
+  onInput: () => Promise<string>,
+  onFlush: (final?: boolean) => void
+}
 
-  pyodideWorker.postMessage({ cmd: "setInterruptBuffer", interruptBuffer })
+export function useCodeRunner({ setLoading, setCodeRunning, onOutput, onInput, onFlush }: IParams) {
+  const pyodideWorker = useRef<Worker>()
+  const interruptBuffer = useRef<Uint8Array>(new Uint8Array(new SharedArrayBuffer(1)))
+
+  useEffect(() => {
+    pyodideWorker.current = new Worker(new URL("../pyodideWorker.ts", import.meta.url))
+
+    const interruptBuffer = new Uint8Array(new SharedArrayBuffer(1))
+
+    pyodideWorker.current.postMessage({ cmd: "setInterruptBuffer", interruptBuffer })
+
+    pyodideWorker.current.onmessage = (msg) => {
+      switch (msg.data.cmd) {
+        case "loaded":
+          setLoading(false)
+          break
+        case "consoleFlush":
+          onFlush(msg.data.final)
+
+          if (msg.data.final) {
+            setCodeRunning(false)
+          }
+
+          break
+        case "consoleOutput":
+          onOutput(msg.data.output, msg.data.error)
+          break
+      }
+    }
+  }, [])
 
   function interruptExecution() {
-    interruptBuffer[0] = 2
+    interruptBuffer.current[0] = 2
   }
 
   function runCode(code: string) {
-    interruptBuffer[0] = 0
-    pyodideWorker.postMessage({ cmd: "runCode", code })
+    interruptBuffer.current[0] = 0
+    pyodideWorker.current?.postMessage({ cmd: "runCode", code })
     setCodeRunning(true)
-  }
-
-  pyodideWorker.onmessage = (msg) => {
-    switch (msg.data.cmd) {
-      case "loaded":
-        setLoading(false)
-        break
-      case "runCodeResult":
-        setCodeRunning(false)
-        break
-      case "runCodeOutput":
-        console.log(msg.data.output)
-        break
-      case "runCodeError":
-        setCodeRunning(false)
-        onError(msg.data.error)
-        break
-    }
   }
 
   return {
