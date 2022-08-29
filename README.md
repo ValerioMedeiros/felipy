@@ -8,3 +8,6 @@ A Free Educational Library in Python.
   - Make a web editor to help professors and students in programming.
   - Publish papers about the main results.
  
+ 
+ The steps of installation are avaliable here: [Steps to install](docs/index.md).
+ 
