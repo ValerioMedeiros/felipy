@@ -4,7 +4,7 @@ import "../index.css"
 import { useState } from "preact/hooks"
 import { useTerminal } from "../components/Terminal"
 import { classes } from "../utils"
-import { useCodeRunner } from "../runners/pyodide-worker"
+import { useCodeRunner } from "../runners/pyodide"
 import { BlocklyEditor } from "../components/Blockly"
 import { useRoute } from "wouter-preact"
 

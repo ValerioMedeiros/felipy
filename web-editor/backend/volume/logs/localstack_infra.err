@@ -1,0 +1,81 @@
+2022-08-28T18:43:33.593  WARN --- [  Thread-108] hypercorn.error            : ASGI Framework Lifespan error, continuing without Lifespan support
+2022-08-28T18:43:33.593  WARN --- [  Thread-108] hypercorn.error            : ASGI Framework Lifespan error, continuing without Lifespan support
+2022-08-28T18:43:33.594  INFO --- [  Thread-108] hypercorn.error            : Running on https://0.0.0.0:4566 (CTRL + C to quit)
+2022-08-28T18:43:33.594  INFO --- [  Thread-108] hypercorn.error            : Running on https://0.0.0.0:4566 (CTRL + C to quit)
+2022-08-28T18:43:41.532  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS sts.GetCallerIdentity => 200
+2022-08-28T18:43:43.150  INFO --- [   asgi_gw_0] localstack.utils.bootstrap : Execution of "_load_service_plugin" took 1576.41ms
+2022-08-28T18:43:43.151  INFO --- [   asgi_gw_0] localstack.utils.bootstrap : Execution of "require" took 1577.25ms
+2022-08-28T18:43:43.153  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS cloudformation.DescribeStacks => 400 (ValidationError)
+2022-08-28T18:43:43.166  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.CreateChangeSet => 200
+2022-08-28T18:43:43.173  WARN --- [   asgi_gw_0] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: ChangeSetType
+2022-08-28T18:43:43.173  WARN --- [   asgi_gw_0] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: StackStatus
+2022-08-28T18:43:43.173  WARN --- [   asgi_gw_0] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: LastUpdatedTime
+2022-08-28T18:43:43.173  WARN --- [   asgi_gw_0] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: DisableRollback
+2022-08-28T18:43:43.173  WARN --- [   asgi_gw_0] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: EnableTerminationProtection
+2022-08-28T18:43:43.174  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS cloudformation.DescribeChangeSet => 200
+2022-08-28T18:43:43.184  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.ExecuteChangeSet => 200
+2022-08-28T18:43:43.361  INFO --- [  Thread-125] l.services.motoserver      : starting moto server on http://0.0.0.0:52297
+2022-08-28T18:43:43.362  INFO --- [   asgi_gw_0] localstack.services.infra  : Starting mock S3 service on http port 4566 ...
+2022-08-28T18:43:48.195  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS cloudformation.DescribeStackEvents => 200
+2022-08-28T18:43:48.211  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.DescribeStackResource => 200
+2022-08-28T18:43:48.233  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS s3.HeadBucket => 200
+2022-08-28T18:43:48.250  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS s3.ListObjectsV2 => 200
+2022-08-28T18:43:48.305  INFO --- [   asgi_gw_0] localstack.services.infra  : Starting mock Lambda service on http port 4566 ...
+2022-08-28T18:43:48.904  INFO --- [   asgi_gw_0] localstack.utils.bootstrap : Execution of "require" took 601.73ms
+2022-08-28T18:43:48.910  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS lambda.GetFunction => 404 (ResourceNotFoundException)
+2022-08-28T18:43:48.931  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS s3.PutObject => 200
+2022-08-28T18:43:48.947  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS s3.PutObject => 200
+2022-08-28T18:43:48.956  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.DeleteChangeSet => 200
+2022-08-28T18:43:48.980  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS s3.GetObject => 200
+2022-08-28T18:43:48.983  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS cloudformation.CreateChangeSet => 200
+2022-08-28T18:43:48.988  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: ChangeSetType
+2022-08-28T18:43:48.989  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: StackStatus
+2022-08-28T18:43:48.989  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: LastUpdatedTime
+2022-08-28T18:43:48.989  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: DisableRollback
+2022-08-28T18:43:48.989  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: EnableTerminationProtection
+2022-08-28T18:43:48.990  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.DescribeChangeSet => 200
+2022-08-28T18:43:48.997  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS cloudformation.ExecuteChangeSet => 200
+2022-08-28T18:43:54.006  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.DescribeStackEvents => 200
+2022-08-28T18:43:58.621  WARN --- [  Thread-165] l.u.c.template_deployer    : Error calling <bound method ClientCreator._create_api_method.<locals>._api_call of <botocore.client.Lambda object at 0x7f91213f0520>> with params: {'Code': {'S3Bucket': '__local__', 'S3Key': '/media/vadolasi/hd/Projects/felipy/web-editor/backend'}, 'FunctionName': 'backend-dev-api', 'Handler': 'src/index.handler', 'MemorySize': 1024, 'Runtime': 'nodejs16.x', 'Role': 'arn:aws:iam::000000000000:role/backend-dev-us-east-1-lambdaRole', 'Timeout': 6} for resource: {'Type': 'AWS::Lambda::Function', 'DependsOn': ['ApiLogGroup'], 'LogicalResourceId': 'ApiLambdaFunction', 'Properties': {'Code': {'S3Bucket': '__local__', 'S3Key': '/media/vadolasi/hd/Projects/felipy/web-editor/backend'}, 'Handler': 'src/index.handler', 'Runtime': 'nodejs16.x', 'FunctionName': 'backend-dev-api', 'MemorySize': 1024, 'Timeout': 6, 'Role': 'arn:aws:iam::000000000000:role/backend-dev-us-east-1-lambdaRole'}, '_state_': {}}
+2022-08-28T18:43:59.015  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS cloudformation.DescribeStackEvents => 200
+2022-08-28T18:44:16.245  INFO --- [   asgi_gw_1] localstack.request.http    : GET / => 200
+2022-08-28T18:44:19.102  INFO --- [   asgi_gw_0] localstack.request.http    : GET / => 200
+2022-08-28T18:44:19.205  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS s3.ListObjects => 404 (404)
+2022-08-28T19:00:07.468  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS sts.GetCallerIdentity => 200
+2022-08-28T19:00:07.747  WARN --- [   asgi_gw_1] l.u.c.template_deployer    : Unexpected resource type ApiGatewayV2::Api when resolving references of resource HttpApi: {"Type": "AWS::ApiGatewayV2::Api", "LogicalResourceId": "HttpApi", "Properties": {"Name": "dev-backend", "ProtocolType": "HTTP"}}. To find out if ApiGatewayV2::Api is supported in LocalStack Pro, please check out our docs at https://docs.localstack.cloud/aws/cloudformation
+2022-08-28T19:00:07.766  WARN --- [   asgi_gw_1] l.u.c.template_deployer    : Unexpected resource type ApiGatewayV2::Api when resolving references of resource HttpApi: {"Type": "AWS::ApiGatewayV2::Api", "LogicalResourceId": "HttpApi", "Properties": {"Name": "dev-backend", "ProtocolType": "HTTP"}}. To find out if ApiGatewayV2::Api is supported in LocalStack Pro, please check out our docs at https://docs.localstack.cloud/aws/cloudformation
+2022-08-28T19:00:07.769  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.DescribeStacks => 200
+2022-08-28T19:00:07.782  WARN --- [   asgi_gw_0] l.aws.protocol.serializer  : Response object StackResourceDetail contains a member which is not specified: PreviousResourceStatus
+2022-08-28T19:00:07.783  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS cloudformation.DescribeStackResource => 200
+2022-08-28T19:00:07.801  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS s3.HeadBucket => 200
+2022-08-28T19:00:07.812  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS s3.ListObjectsV2 => 200
+2022-08-28T19:00:07.833  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS s3.HeadObject => 200
+2022-08-28T19:00:07.833  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS s3.HeadObject => 200
+2022-08-28T19:00:07.847  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS lambda.GetFunction => 404 (ResourceNotFoundException)
+2022-08-28T19:00:07.873  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS s3.PutObject => 200
+2022-08-28T19:00:07.886  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS s3.PutObject => 200
+2022-08-28T19:00:07.894  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.DeleteChangeSet => 200
+2022-08-28T19:00:07.910  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS s3.GetObject => 200
+2022-08-28T19:00:07.914  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS cloudformation.CreateChangeSet => 200
+2022-08-28T19:00:07.923  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: ChangeSetType
+2022-08-28T19:00:07.923  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: StackStatus
+2022-08-28T19:00:07.923  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: LastUpdatedTime
+2022-08-28T19:00:07.923  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: DisableRollback
+2022-08-28T19:00:07.923  WARN --- [   asgi_gw_1] l.aws.protocol.serializer  : Response object DescribeChangeSetOutput contains a member which is not specified: EnableTerminationProtection
+2022-08-28T19:00:07.924  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.DescribeChangeSet => 200
+2022-08-28T19:00:07.937  INFO --- [   asgi_gw_0] localstack.request.aws     : AWS cloudformation.ExecuteChangeSet => 200
+2022-08-28T19:00:08.449  INFO --- [  Thread-322] l.u.c.template_deployer    : Updating resource IamRoleLambdaExecution of type IAM::Role
+2022-08-28T19:00:12.949  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.DescribeStackEvents => 200
+2022-08-28T19:00:16.221  WARN --- [  Thread-322] l.u.c.template_deployer    : Error calling <bound method ClientCreator._create_api_method.<locals>._api_call of <botocore.client.Lambda object at 0x7f91213f0520>> with params: {'Code': {'S3Bucket': '__local__', 'S3Key': '/media/vadolasi/hd/Projects/felipy/web-editor/backend'}, 'FunctionName': 'backend-dev-api', 'Handler': 'src/index.handler', 'MemorySize': 1024, 'Runtime': 'nodejs16.x', 'Role': 'arn:aws:iam::000000000000:role/backend-dev-us-east-1-lambdaRole', 'Timeout': 6} for resource: {'Type': 'AWS::Lambda::Function', 'DependsOn': ['ApiLogGroup'], 'LogicalResourceId': 'ApiLambdaFunction', 'Properties': {'Code': {'S3Bucket': '__local__', 'S3Key': '/media/vadolasi/hd/Projects/felipy/web-editor/backend'}, 'Handler': 'src/index.handler', 'Runtime': 'nodejs16.x', 'FunctionName': 'backend-dev-api', 'MemorySize': 1024, 'Timeout': 6, 'Role': 'arn:aws:iam::000000000000:role/backend-dev-us-east-1-lambdaRole'}, '_state_': {}, 'PhysicalResourceId': None}
+2022-08-28T19:00:17.964  INFO --- [   asgi_gw_1] localstack.request.aws     : AWS cloudformation.DescribeStackEvents => 200
+2022-08-29T00:56:04.451 ERROR --- [  MainThread] asyncio                    : Task was destroyed but it is pending!
+task: <Task pending name='Task-328' coro=<worker_serve.<locals>._server_callback() running at /opt/code/localstack/.venv/lib/python3.10/site-packages/hypercorn/asyncio/run.py:100> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()]>>
+Exception ignored in: <coroutine object worker_serve.<locals>._server_callback at 0x7f9122084190>
+Traceback (most recent call last):
+  File "/opt/code/localstack/.venv/lib/python3.10/site-packages/hypercorn/asyncio/run.py", line 100, in _server_callback
+    await TCPServer(app, loop, config, context, reader, writer)
+  File "/opt/code/localstack/.venv/lib/python3.10/site-packages/hypercorn/asyncio/tcp_server.py", line 70, in run
+    async with TaskGroup(self.loop) as task_group:
+RuntimeError: coroutine ignored GeneratorExit
+2022-08-29T00:56:04.452 ERROR --- [  MainThread] asyncio                    : Task was destroyed but it is pending!
+task: <Task pending name='Task-329' coro=<H2Protocol.send_task() running at /opt/code/localstack/.venv/lib/python3.10/site-packages/hypercorn/protocol/h2.py:148> wait_for=<Future cancelled> cb=[gather.<locals>._done_callback() at /usr/local/lib/python3.10/asyncio/tasks.py:720]>

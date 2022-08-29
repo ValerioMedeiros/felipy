@@ -1,4 +1,2 @@
-node_modules/
-.env
-*.db*
-dist/
+node_modules
+.serverless
